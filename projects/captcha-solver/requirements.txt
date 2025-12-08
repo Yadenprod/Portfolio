@@ -1,0 +1,28 @@
+# Основные зависимости для CAPTCHA-решения
+ddddocr>=1.4.11
+opencv-python>=4.8.0
+Pillow>=10.0.0
+numpy>=1.24.0
+
+# Web-скрапинг и автоматизация браузера
+selenium>=4.15.0
+webdriver-manager>=4.0.0
+aiohttp>=3.9.0
+
+# API сервер
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.4.0
+
+# Утилиты
+python-multipart>=0.0.6
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+scikit-image>=0.21.0
+matplotlib>=3.7.0
+scipy>=1.11.0
+pytesseract>=0.3.10
+easyocr>=1.7.0
+psutil>=5.9.0
+aiofiles>=23.2.0 

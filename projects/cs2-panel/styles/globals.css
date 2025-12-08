@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 17, 24, 39;
+  --background-end-rgb: 30, 41, 59;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer components {
+  .cs-button {
+    @apply px-4 py-2 rounded-md bg-cs-orange text-white font-medium hover:bg-opacity-90 transition-all;
+  }
+  
+  .cs-input {
+    @apply px-4 py-2 rounded-md bg-cs-dark border border-gray-700 focus:border-cs-orange outline-none;
+  }
+
+  .cs-card {
+    @apply bg-cs-dark p-6 rounded-xl border border-gray-800 shadow-xl;
+  }
+} 

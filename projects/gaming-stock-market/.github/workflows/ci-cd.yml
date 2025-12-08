@@ -1,0 +1,93 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  DOTNET_VERSION: '8.0.x'
+  NODE_VERSION: '18.x'
+  DOCKER_IMAGE_BACKEND: gamingstockmarket-backend
+  DOCKER_IMAGE_FRONTEND: gamingstockmarket-frontend
+  DOCKER_REGISTRY: docker.io # Or your private registry
+  # DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }} # Uncomment and set in GitHub Secrets
+  # DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }} # Uncomment and set in GitHub Secrets
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Restore .NET dependencies
+      run: dotnet restore Backend/GamingStockMarket.API/GamingStockMarket.API.csproj
+
+    - name: Build .NET backend
+      run: dotnet build Backend/GamingStockMarket.API/GamingStockMarket.API.csproj --configuration Release --no-restore
+
+    - name: Run .NET tests
+      run: dotnet test Backend/GamingStockMarket.Tests/GamingStockMarket.Tests.csproj --configuration Release --no-build
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Install frontend dependencies
+      run: npm ci
+      working-directory: Frontend/gaming-stock-market
+
+    - name: Build frontend
+      run: npm run build
+      working-directory: Frontend/gaming-stock-market
+
+  docker-build-and-push:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # - name: Log in to Docker Hub
+    #   uses: docker/login-action@v3
+    #   with:
+    #     username: ${{ env.DOCKER_USERNAME }}
+    #     password: ${{ env.DOCKER_TOKEN }}
+    # Uncomment and set DOCKER_USERNAME and DOCKER_TOKEN in GitHub Secrets
+
+    - name: Build and push backend Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: Backend/GamingStockMarket.API
+        file: Backend/GamingStockMarket.API/Dockerfile
+        push: false # Set to true to push to registry
+        tags: ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}/${{ env.DOCKER_IMAGE_BACKEND }}:latest
+
+    - name: Build and push frontend Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: Frontend/gaming-stock-market
+        file: Frontend/gaming-stock-market/Dockerfile
+        push: false # Set to true to push to registry
+        tags: ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}/${{ env.DOCKER_IMAGE_FRONTEND }}:latest
+
+  # Deploy to production (example placeholder)
+  # deploy:
+  #   needs: docker-build-and-push
+  #   runs-on: ubuntu-latest
+  #   environment: production
+  #   steps:
+  #     - name: Deploy to server
+  #       run: echo "Deploying to production... (implement your deployment logic here)"

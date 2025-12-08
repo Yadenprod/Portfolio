@@ -1,0 +1,9 @@
+🚀 API Server running on http://localhost:3001
+📡 WebSocket server running on ws://localhost:3001/ws
+📊 Available endpoints:
+  GET /api/health
+  GET /api/sports/events
+  GET /api/sports/live
+  GET /api/sports/user-bets
+  GET /api/sports/bet-history
+  GET /api/sports/bet-stats

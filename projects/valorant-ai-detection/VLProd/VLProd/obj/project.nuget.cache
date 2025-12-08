@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "dgSpecHash": "RXk1LL314nQ=",
+  "success": true,
+  "projectFilePath": "E:\\VLProd\\VLProd\\VLProd\\VLProd.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\why\\.nuget\\packages\\inputsimulator\\1.0.4\\inputsimulator.1.0.4.nupkg.sha512",
+    "C:\\Users\\why\\.nuget\\packages\\opencvsharp4\\4.11.0.20250507\\opencvsharp4.4.11.0.20250507.nupkg.sha512",
+    "C:\\Users\\why\\.nuget\\packages\\opencvsharp4.runtime.win\\4.11.0.20250507\\opencvsharp4.runtime.win.4.11.0.20250507.nupkg.sha512",
+    "C:\\Users\\why\\.nuget\\packages\\opencvsharp4.windows\\4.11.0.20250507\\opencvsharp4.windows.4.11.0.20250507.nupkg.sha512",
+    "C:\\Users\\why\\.nuget\\packages\\system.memory\\4.6.3\\system.memory.4.6.3.nupkg.sha512",
+    "C:\\Users\\why\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\9.0.8\\microsoft.netcore.app.runtime.win-x64.9.0.8.nupkg.sha512",
+    "C:\\Users\\why\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\9.0.8\\microsoft.windowsdesktop.app.runtime.win-x64.9.0.8.nupkg.sha512",
+    "C:\\Users\\why\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\9.0.8\\microsoft.aspnetcore.app.runtime.win-x64.9.0.8.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "message": "Пакет \"InputSimulator 1.0.4\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\", а не целевой платформы проекта \"net9.0\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "projectPath": "E:\\VLProd\\VLProd\\VLProd\\VLProd.csproj",
+      "warningLevel": 1,
+      "filePath": "E:\\VLProd\\VLProd\\VLProd\\VLProd.csproj",
+      "libraryId": "InputSimulator",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
+}

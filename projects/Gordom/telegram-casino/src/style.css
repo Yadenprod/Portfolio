@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Шрифт Deftone */
+@font-face {
+  font-family: 'Deftone';
+  src: url('/fonts/deftone.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* CSS переменные для Telegram темы */
+:root {
+  --tg-theme-bg-color: #202024;
+  --tg-theme-text-color: #cfcde9;
+  --tg-theme-hint-color: #6a6a7a;
+  --tg-theme-link-color: #7c75d9;
+  --tg-theme-button-color: #7c75d9;
+  --tg-theme-button-text-color: #ffffff;
+}
+
+/* Базовые стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+  background-color: var(--tg-theme-bg-color);
+  color: var(--tg-theme-text-color);
+  font-family: 'Rubik', sans-serif;
+}
+
+#app {
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Скрытие скроллбара */
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+/* Анимации */
+@keyframes slideUpScale {
+  0% {
+    transform: translateY(20%) scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Лоадер */
+.loader {
+  position: relative;
+  overflow: hidden;
+}
+
+.loader:before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -150px;
+  top: 0;
+  height: 100%;
+  width: 150px;
+  background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.1) 60%, transparent 100%);
+  animation: load 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes load {
+  from {
+    left: -150px;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+/* Telegram Web App специфичные стили */
+.tg-app {
+  background-color: var(--tg-theme-bg-color);
+  color: var(--tg-theme-text-color);
+}
+
+.tg-button {
+  background-color: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tg-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.tg-button:active {
+  transform: translateY(0);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+/* Предотвращение зума на мобильных */
+@media (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}

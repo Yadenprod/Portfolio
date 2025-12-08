@@ -1,0 +1,141 @@
+/* Базовые стили для кода */
+pre, code {
+  font-family: 'Roboto Mono', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* Контейнер для кода */
+.code-block {
+  background: linear-gradient(120deg, #f0f4f8 60%, #e6f2ff 100%);
+  border: 1px solid #0070e0;
+  border-radius: 2rem;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 16px 4px #0070e0;
+  transition: all 0.3s;
+}
+.code-block:hover {
+  border-color: #7a4ebf;
+  box-shadow: 0 0 32px 8px #7a4ebf;
+}
+
+/* Нумерация строк */
+.code-block-numbered {
+  display: flex;
+}
+
+.line-numbers {
+  user-select: none;
+  padding-right: 1rem;
+  text-align: right;
+  color: #627d98;
+  background: #e6f2ff;
+  border-right: 2px solid #0070e0;
+  padding: 1.5rem 1rem;
+  border-radius: 2rem 0 0 2rem;
+}
+
+.code-content {
+  flex-grow: 1;
+  padding: 1.5rem;
+  font-size: 1rem;
+  color: #003d80;
+  overflow-x: auto;
+}
+
+/* Подсветка синтаксиса */
+.token {
+  transition: color 0.3s ease;
+}
+
+.token.comment {
+  color: #334e68;
+  font-style: italic;
+}
+
+.token.keyword {
+  color: #7a4ebf;
+  font-weight: bold;
+}
+
+.token.string {
+  color: #0070e0;
+}
+
+.token.function {
+  color: #627d98;
+}
+
+.token.number {
+  color: #1e1133;
+}
+
+/* Кнопка копирования */
+.copy-code-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: linear-gradient(120deg, #0070e0, #7a4ebf);
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  box-shadow: 0 0 8px 2px #0070e0;
+  opacity: 0;
+  transition: all 0.3s;
+}
+.code-block:hover .copy-code-btn {
+  opacity: 1;
+}
+.copy-code-btn:hover {
+  background: linear-gradient(120deg, #7a4ebf, #0070e0);
+  box-shadow: 0 0 16px 4px #7a4ebf;
+}
+.copy-code-btn:active {
+  transform: scale(0.95);
+}
+
+/* Темный режим */
+@media (prefers-color-scheme: dark) {
+  .code-block {
+    background: linear-gradient(120deg, #102a43 60%, #1e1133 100%);
+    border-color: #80cdff;
+    box-shadow: 0 0 16px 4px #80cdff;
+  }
+  .line-numbers {
+    color: #80cdff;
+    background: #1e1133;
+    border-right-color: #80cdff;
+  }
+  .code-content {
+    color: #80cdff;
+  }
+  .token.comment {
+    color: #829ab1;
+  }
+  .token.keyword {
+    color: #936bd2;
+  }
+  .token.string {
+    color: #80cdff;
+  }
+  .token.function {
+    color: #4db8ff;
+  }
+  .token.number {
+    color: #7a4ebf;
+  }
+  .copy-code-btn {
+    background: linear-gradient(120deg, #80cdff, #936bd2);
+    color: #1e1133;
+    box-shadow: 0 0 8px 2px #80cdff;
+  }
+  .copy-code-btn:hover {
+    background: linear-gradient(120deg, #936bd2, #80cdff);
+    box-shadow: 0 0 16px 4px #936bd2;
+  }
+}

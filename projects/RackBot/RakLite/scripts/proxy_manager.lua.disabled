@@ -1,0 +1,419 @@
+-- Proxy manager for RakSAMP Lite
+-- Loads proxies from file and uses them
+
+require("addon")
+
+-- ============================================
+-- SETTINGS
+-- ============================================
+local PROXY_FILE = "proxies.txt"  -- File with proxies (ip:port on each line)
+local CURRENT_PROXY_INDEX = 1     -- Current proxy index
+local PROXIES = {}                 -- Proxy list
+local LAST_FILE_MOD_TIME = 0      -- Last modification time of proxy file
+local AUTO_RELOAD_INTERVAL = 300000  -- Check for file changes every 5 minutes (in ms)
+local CONNECTION_TIMEOUT = 5000   -- Timeout for proxy connection (5 seconds)
+local RETRY_DELAY = 500           -- Delay before trying next proxy (0.5 seconds - быстрый режим)
+local FAST_MODE = true            -- Быстрый режим переключения прокси
+local MAX_RETRIES_PER_PROXY = 1   -- Max retries per proxy before switching
+local FAILED_PROXIES = {}         -- Track failed proxies to avoid immediate retry
+local LAST_PROXY_ATTEMPT = 0      -- Timestamp of last proxy attempt
+local CONNECTION_TIMEOUT_MS = 6000  -- Максимальное время ожидания подключения (6 секунд - быстрее переключение)
+local connectionTimer = nil       -- Таймер для принудительного переключения
+
+-- ============================================
+-- LOAD PROXIES
+-- ============================================
+
+function getFileModTime(filename)
+    -- Try to get file modification time
+    local file = io.open(filename, "r")
+    if file then
+        file:close()
+        -- In Lua, we can't directly get mod time, so we'll use file size as a proxy
+        -- Or check if file exists and is readable
+        return os.time() -- For now, return current time if file exists
+    end
+    return 0
+end
+
+function loadProxies()
+    local file = io.open(PROXY_FILE, "r")
+    if not file then
+        print("=========================================")
+        print("ERROR: PROXY FILE NOT FOUND!")
+        print("=========================================")
+        print("Create file", PROXY_FILE, "in RakLite/ folder")
+        print("Format: ip:port on each line")
+        print("Example:")
+        print("  8.137.13.191:9999")
+        print("  13.212.81.49:8103")
+        print("=========================================")
+        return false
+    end
+    
+    local oldCount = #PROXIES
+    PROXIES = {}
+    for line in file:lines() do
+        line = line:match("^%s*(.-)%s*$") -- Remove spaces
+        if line and line ~= "" and line:match("^%d+%.%d+%.%d+%.%d+:%d+$") then
+            table.insert(PROXIES, line)
+        end
+    end
+    file:close()
+    
+    -- Update last modification time
+    LAST_FILE_MOD_TIME = os.time()
+    
+    print("=========================================")
+    print("SUCCESS: PROXIES LOADED")
+    print("=========================================")
+    print("Loaded proxies:", #PROXIES)
+    if oldCount > 0 and oldCount ~= #PROXIES then
+        print("Proxy list updated! (was", oldCount .. ", now", #PROXIES .. ")")
+        -- Reset index if current proxy is out of bounds
+        if CURRENT_PROXY_INDEX > #PROXIES then
+            CURRENT_PROXY_INDEX = 1
+        end
+    end
+    return true
+end
+
+function checkAndReloadProxies()
+    -- Check if file was modified (simple check by trying to read file size)
+    local file = io.open(PROXY_FILE, "r")
+    if file then
+        -- File exists, check if we should reload
+        -- Since we can't get exact mod time in Lua easily, we'll reload periodically
+        -- or when explicitly requested
+        file:close()
+        -- For now, we'll rely on periodic reload or manual reload
+    end
+end
+
+-- ============================================
+-- ПОДКЛЮЧЕНИЕ К ПРОКСИ
+-- ============================================
+
+function connectToProxy()
+    if #PROXIES == 0 then
+        print("ERROR: No proxies available!")
+        return false
+    end
+    
+    if CURRENT_PROXY_INDEX > #PROXIES then
+        CURRENT_PROXY_INDEX = 1 -- Start from beginning
+        -- Clear failed proxies after full cycle
+        FAILED_PROXIES = {}
+    end
+    
+    local proxy = PROXIES[CURRENT_PROXY_INDEX]
+    
+    -- Skip if this proxy recently failed (try next one)
+    if FAILED_PROXIES[proxy] then
+        print("Skipping failed proxy:", proxy)
+        CURRENT_PROXY_INDEX = CURRENT_PROXY_INDEX + 1
+        if CURRENT_PROXY_INDEX > #PROXIES then
+            CURRENT_PROXY_INDEX = 1
+            FAILED_PROXIES = {} -- Reset after full cycle
+        end
+        proxy = PROXIES[CURRENT_PROXY_INDEX]
+    end
+    
+    -- Упрощенное логирование в быстром режиме
+    if FAST_MODE then
+        print("Connecting to proxy", CURRENT_PROXY_INDEX, "of", #PROXIES .. ":", proxy)
+    else
+        print("=========================================")
+        print("CONNECTING TO PROXY")
+        print("=========================================")
+        print("Proxy", CURRENT_PROXY_INDEX, "of", #PROXIES)
+        print("Address:", proxy)
+    end
+    
+    -- Disconnect from previous proxy if connected
+    if isProxyConnected() then
+        proxyDisconnect()
+    end
+    
+    -- Отменяем предыдущий таймер если есть
+    if connectionTimer then
+        connectionTimer:kill()
+        connectionTimer = nil
+    end
+    
+    -- Запускаем таймер для принудительного переключения при долгом подключении
+    connectionTimer = newTask(function()
+        wait(CONNECTION_TIMEOUT_MS)
+        if not isProxyConnected() then
+            print("Connection timeout, switching to next proxy...")
+            -- Помечаем прокси как нерабочий
+            if proxy and proxy ~= "unknown" then
+                FAILED_PROXIES[proxy] = true
+            end
+            -- Переключаемся на следующий
+            connectToNextProxy()
+        end
+    end)
+    
+    -- Connect (without auth, as these are free proxies)
+    proxyConnect(proxy)
+    LAST_PROXY_ATTEMPT = os.clock()
+    
+    return true
+end
+
+function connectToNextProxy()
+    -- Быстрое переключение на следующий прокси
+    CURRENT_PROXY_INDEX = CURRENT_PROXY_INDEX + 1
+    if CURRENT_PROXY_INDEX > #PROXIES then
+        CURRENT_PROXY_INDEX = 1
+        -- После полного цикла очищаем список нерабочих (может быть временная проблема)
+        FAILED_PROXIES = {}
+        print("Reset failed proxies list, retrying all...")
+    end
+    
+    -- В быстром режиме пропускаем максимум 5 нерабочих прокси подряд
+    if FAST_MODE then
+        local skipped = 0
+        local maxSkip = 5
+        
+        while FAILED_PROXIES[PROXIES[CURRENT_PROXY_INDEX]] and skipped < maxSkip do
+            CURRENT_PROXY_INDEX = CURRENT_PROXY_INDEX + 1
+            if CURRENT_PROXY_INDEX > #PROXIES then
+                CURRENT_PROXY_INDEX = 1
+                FAILED_PROXIES = {} -- Сброс после полного цикла
+                break
+            end
+            skipped = skipped + 1
+        end
+        
+        if skipped > 0 then
+            print("Skipped", skipped, "failed proxy(ies)")
+        end
+    end
+    
+    return connectToProxy()
+end
+
+-- ============================================
+-- EVENTS
+-- ============================================
+
+function onLoad()
+    print("=========================================")
+    print("PROXY MANAGER LOADED")
+    print("=========================================")
+    print("Auto-reload: Enabled (every 5 minutes)")
+    if FAST_MODE then
+        print("Fast mode: ENABLED (0.5s delay)")
+    else
+        print("Fast mode: DISABLED (3s delay)")
+    end
+    print("Commands: !proxy next/fast/slow/reset")
+    print("=========================================")
+    
+    -- Load proxies
+    if loadProxies() then
+        -- Connect to first proxy
+        connectToProxy()
+    end
+    
+    -- Start periodic reload task
+    newTask(function()
+        while true do
+            wait(AUTO_RELOAD_INTERVAL) -- Wait 5 minutes
+            print("[AUTO-RELOAD] Checking for proxy updates...")
+            local oldCount = #PROXIES
+            if loadProxies() then
+                if oldCount ~= #PROXIES then
+                    print("[AUTO-RELOAD] Proxy list updated! Reloaded", #PROXIES, "proxies")
+                    -- If not connected, try to connect with new list
+                    if not isProxyConnected() then
+                        print("[AUTO-RELOAD] Not connected, trying to connect...")
+                        connectToProxy()
+                    end
+                else
+                    print("[AUTO-RELOAD] No changes detected")
+                end
+            end
+        end
+    end)
+end
+
+-- Don't connect to server without proxy
+function onRequestConnect()
+    if not isProxyConnected() then
+        print("ERROR: Proxy not connected! Trying next proxy...")
+        connectToNextProxy()
+        -- Cancel this connection attempt - will retry when proxy connects
+        return false
+    end
+    print("SUCCESS: Proxy connected, connecting to server...")
+end
+
+-- Successful proxy connection
+function onProxyConnect()
+    local currentProxy = PROXIES[CURRENT_PROXY_INDEX]
+    
+    -- Отменяем таймер подключения
+    if connectionTimer then
+        connectionTimer:kill()
+        connectionTimer = nil
+    end
+    
+    print("=========================================")
+    print("SUCCESS: CONNECTED TO PROXY!")
+    print("=========================================")
+    print("Proxy:", currentProxy)
+    print("Now you can connect to server")
+    
+    -- Remove from failed list if it was there
+    if currentProxy and FAILED_PROXIES[currentProxy] then
+        FAILED_PROXIES[currentProxy] = nil
+    end
+end
+
+-- Disconnect from proxy
+function onProxyDisconnect()
+    local currentProxy = PROXIES[CURRENT_PROXY_INDEX] or "unknown"
+    
+    -- Отменяем таймер подключения
+    if connectionTimer then
+        connectionTimer:kill()
+        connectionTimer = nil
+    end
+    
+    if FAST_MODE then
+        print("Disconnected:", currentProxy)
+    else
+        print("=========================================")
+        print("ERROR: DISCONNECTED FROM PROXY")
+        print("=========================================")
+        print("Proxy:", currentProxy)
+    end
+    
+    -- Mark proxy as failed if it was connected
+    if currentProxy ~= "unknown" then
+        FAILED_PROXIES[currentProxy] = true
+    end
+    
+    -- Быстрое переключение
+    if FAST_MODE then
+        newTask(function()
+            wait(100) -- Очень короткая задержка
+            if not isProxyConnected() then
+                connectToNextProxy()
+            end
+        end)
+    else
+        newTask(function()
+            wait(RETRY_DELAY)
+            if not isProxyConnected() then
+                connectToNextProxy()
+            end
+        end)
+    end
+end
+
+-- Proxy connection error
+function onProxyError()
+    local currentProxy = PROXIES[CURRENT_PROXY_INDEX] or "unknown"
+    
+    -- Отменяем таймер подключения
+    if connectionTimer then
+        connectionTimer:kill()
+        connectionTimer = nil
+    end
+    
+    -- Упрощенное логирование в быстром режиме
+    if FAST_MODE then
+        print("Failed:", currentProxy, "- trying next...")
+    else
+        print("=========================================")
+        print("ERROR: PROXY CONNECTION FAILED")
+        print("=========================================")
+        print("Proxy:", currentProxy)
+        print("Trying next proxy in", RETRY_DELAY / 1000, "seconds...")
+    end
+    
+    -- Mark proxy as failed
+    if currentProxy ~= "unknown" then
+        FAILED_PROXIES[currentProxy] = true
+    end
+    
+    -- Быстрое переключение - сразу, без задержки в быстром режиме
+    if FAST_MODE then
+        -- Минимальная задержка для стабильности
+        newTask(function()
+            wait(100) -- Очень короткая задержка
+            connectToNextProxy()
+        end)
+    else
+        newTask(function()
+            wait(RETRY_DELAY)
+            connectToNextProxy()
+        end)
+    end
+end
+
+-- Server connection
+function onConnect()
+    print("SUCCESS: Connected to server via proxy!")
+    print("Using proxy:", PROXIES[CURRENT_PROXY_INDEX])
+end
+
+-- Server disconnect
+function onDisconnect()
+    print("Disconnected from server")
+    -- Can disconnect from proxy
+    -- proxyDisconnect()
+end
+
+-- ============================================
+-- COMMANDS (via onRunCommand)
+-- ============================================
+
+function onRunCommand(cmd)
+    if cmd:find("^!proxy") then
+        local action = cmd:match("^!proxy%s+(%w+)")
+        
+        if action == "list" then
+            print("=========================================")
+            print("PROXY LIST")
+            print("=========================================")
+            for i, proxy in ipairs(PROXIES) do
+                local marker = (i == CURRENT_PROXY_INDEX) and ">>> " or "    "
+                print(marker .. i .. ". " .. proxy)
+            end
+            return false
+        elseif action == "next" then
+            connectToNextProxy()
+            return false
+        elseif action == "current" then
+            print("Current proxy:", PROXIES[CURRENT_PROXY_INDEX] or "none")
+            print("Status:", isProxyConnected() and "connected" or "not connected")
+            return false
+        elseif action == "reload" then
+            loadProxies()
+            return false
+        elseif action == "disconnect" then
+            proxyDisconnect()
+            return false
+        elseif action == "fast" then
+            FAST_MODE = true
+            RETRY_DELAY = 500
+            print("Fast mode enabled (0.5s delay)")
+            return false
+        elseif action == "slow" then
+            FAST_MODE = false
+            RETRY_DELAY = 3000
+            print("Slow mode enabled (3s delay)")
+            return false
+        elseif action == "reset" then
+            FAILED_PROXIES = {}
+            print("Failed proxies list cleared")
+            return false
+        end
+    end
+end
+

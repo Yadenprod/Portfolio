@@ -1,0 +1,202 @@
+{
+  "matches": [
+    {
+      "match_info": {
+        "id": "hltv_1",
+        "date": "2024-03-01T12:00:00",
+        "team1": "FaZe",
+        "team2": "NAVI",
+        "tournament": "IEM Katowice 2024",
+        "format": "BO3",
+        "sport": "csgo",
+        "odds": {"team1": 2.1, "team2": 1.8},
+        "stage": "Playoffs"
+      },
+      "team1_stats": {
+        "rating": 1.25,
+        "map_win_rate": 0.68,
+        "pistol_win_rate": 0.55,
+        "clutch_success": 0.42,
+        "recent_form": ["W", "W", "L", "W", "W"],
+        "tier": 1
+      },
+      "team2_stats": {
+        "rating": 1.22,
+        "map_win_rate": 0.65,
+        "pistol_win_rate": 0.58,
+        "clutch_success": 0.45,
+        "recent_form": ["W", "W", "W", "L", "W"],
+        "tier": 1
+      },
+      "winner": "team1"
+    },
+    {
+      "match_info": {
+        "id": "hltv_2",
+        "date": "2024-03-02T15:00:00",
+        "team1": "Vitality",
+        "team2": "G2",
+        "tournament": "BLAST Premier Spring",
+        "format": "BO3",
+        "sport": "csgo",
+        "odds": {"team1": 1.75, "team2": 2.15},
+        "stage": "Playoffs"
+      },
+      "team1_stats": {
+        "rating": 1.20,
+        "map_win_rate": 0.63,
+        "pistol_win_rate": 0.57,
+        "clutch_success": 0.43,
+        "recent_form": ["W", "W", "W", "L", "W"],
+        "tier": 1
+      },
+      "team2_stats": {
+        "rating": 1.15,
+        "map_win_rate": 0.60,
+        "pistol_win_rate": 0.53,
+        "clutch_success": 0.40,
+        "recent_form": ["W", "L", "W", "W", "L"],
+        "tier": 1
+      },
+      "winner": "team1"
+    },
+    {
+      "match_info": {
+        "id": "hltv_3",
+        "date": "2024-03-03T18:00:00",
+        "team1": "Heroic",
+        "team2": "Cloud9",
+        "tournament": "ESL Pro League",
+        "format": "BO3",
+        "sport": "csgo",
+        "odds": {"team1": 1.65, "team2": 2.35},
+        "stage": "Playoffs"
+      },
+      "team1_stats": {
+        "rating": 1.14,
+        "map_win_rate": 0.59,
+        "pistol_win_rate": 0.52,
+        "clutch_success": 0.40,
+        "recent_form": ["W", "L", "W", "W", "W"],
+        "tier": 1
+      },
+      "team2_stats": {
+        "rating": 1.10,
+        "map_win_rate": 0.57,
+        "pistol_win_rate": 0.50,
+        "clutch_success": 0.38,
+        "recent_form": ["W", "L", "W", "L", "W"],
+        "tier": 2
+      },
+      "winner": "team1"
+    },
+    {
+      "match_info": {
+        "id": "hltv_4",
+        "date": "2024-03-04T20:00:00",
+        "team1": "Spirit",
+        "team2": "ENCE",
+        "tournament": "European RMR",
+        "format": "BO3",
+        "sport": "csgo",
+        "odds": {"team1": 1.90, "team2": 1.95},
+        "stage": "Playoffs"
+      },
+      "team1_stats": {
+        "rating": 1.16,
+        "map_win_rate": 0.61,
+        "pistol_win_rate": 0.54,
+        "clutch_success": 0.41,
+        "recent_form": ["W", "W", "W", "W", "L"],
+        "tier": 1
+      },
+      "team2_stats": {
+        "rating": 1.08,
+        "map_win_rate": 0.55,
+        "pistol_win_rate": 0.48,
+        "clutch_success": 0.35,
+        "recent_form": ["L", "W", "L", "W", "W"],
+        "tier": 2
+      },
+      "winner": "team1"
+    },
+    {
+      "match_info": {
+        "id": "hltv_5",
+        "date": "2024-03-05T16:00:00",
+        "team1": "Astralis",
+        "team2": "FURIA",
+        "tournament": "BLAST Premier",
+        "format": "BO1",
+        "sport": "csgo",
+        "odds": {"team1": 1.90, "team2": 1.95},
+        "stage": "Playoffs"
+      },
+      "team1_stats": {
+        "rating": 1.18,
+        "map_win_rate": 0.62,
+        "pistol_win_rate": 0.56,
+        "clutch_success": 0.48,
+        "recent_form": ["L", "W", "W", "W", "D"],
+        "tier": 1
+      },
+      "team2_stats": {
+        "rating": 1.12,
+        "map_win_rate": 0.58,
+        "pistol_win_rate": 0.51,
+        "clutch_success": 0.39,
+        "recent_form": ["W", "W", "L", "W", "L"],
+        "tier": 2
+      },
+      "winner": "team2"
+    },
+    {
+      "team1_stats": {
+        "rating": 1.2,
+        "map_win_rate": 0.65,
+        "pistol_win_rate": 0.55,
+        "clutch_success": 0.45,
+        "recent_form": ["W", "W", "L", "W", "W"],
+        "tier": 1
+      },
+      "team2_stats": {
+        "rating": 1.1,
+        "map_win_rate": 0.55,
+        "pistol_win_rate": 0.52,
+        "clutch_success": 0.42,
+        "recent_form": ["W", "L", "W", "L", "W"],
+        "tier": 2
+      },
+      "match_info": {
+        "format": "BO3",
+        "tournament": "Major",
+        "stage": "Playoffs"
+      },
+      "winner": "team1"
+    },
+    {
+      "team1_stats": {
+        "rating": 1.0,
+        "map_win_rate": 0.45,
+        "pistol_win_rate": 0.48,
+        "clutch_success": 0.38,
+        "recent_form": ["L", "L", "W", "L", "W"],
+        "tier": 3
+      },
+      "team2_stats": {
+        "rating": 1.3,
+        "map_win_rate": 0.70,
+        "pistol_win_rate": 0.58,
+        "clutch_success": 0.48,
+        "recent_form": ["W", "W", "W", "L", "W"],
+        "tier": 1
+      },
+      "match_info": {
+        "format": "BO3",
+        "tournament": "Major",
+        "stage": "Groups"
+      },
+      "winner": "team2"
+    }
+  ]
+} 

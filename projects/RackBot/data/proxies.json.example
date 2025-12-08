@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "host": "proxy1.example.com",
+    "port": 8080,
+    "username": "user1",
+    "password": "pass1",
+    "type": "http",
+    "status": "active"
+  },
+  {
+    "id": 2,
+    "host": "proxy2.example.com",
+    "port": 1080,
+    "username": "user2",
+    "password": "pass2",
+    "type": "socks5",
+    "status": "active"
+  }
+]
+

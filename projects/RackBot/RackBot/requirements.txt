@@ -1,0 +1,34 @@
+# Основные зависимости для RackBot (Headless SAMP Bot)
+
+# Работа с сетью и SAMP
+requests>=2.31.0
+aiohttp>=3.9.0
+python-socketio>=5.10.0
+
+# Работа с прокси
+requests[socks]>=2.31.0
+pysocks>=1.7.1
+
+# Управление MAC адресами (Windows)
+wmi>=1.5.1
+netifaces>=0.11.0
+
+# Работа с аккаунтами и данными
+cryptography>=41.0.0
+python-dotenv>=1.0.0
+
+# Утилиты
+pyyaml>=6.0
+colorama>=0.4.6
+faker>=19.0.0  # Генерация случайных данных для регистрации
+keyboard>=0.13.5  # Эмуляция нажатий клавиш
+
+# Логирование
+loguru>=0.7.2
+
+# Асинхронность
+asyncio>=3.4.3
+
+# База данных для хранения аккаунтов (опционально)
+sqlalchemy>=2.0.0
+aiosqlite>=0.19.0

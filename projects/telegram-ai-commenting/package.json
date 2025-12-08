@@ -1,0 +1,24 @@
+{
+  "name": "telegram-qr-auth",
+  "version": "1.0.0",
+  "description": "Telegram QR authentication and session management",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "auth": "ts-node src/auth.ts",
+    "test": "ts-node src/test-session.ts"
+  },
+  "dependencies": {
+    "gramjs": "^2.17.0",
+    "qrcode-terminal": "^0.12.0",
+    "dotenv": "^16.3.1",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.1"
+  }
+}

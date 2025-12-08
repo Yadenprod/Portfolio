@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_DB: gamingstockmarketdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: millioner2023
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: .
+      dockerfile: Backend/GamingStockMarket.API/Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings:DefaultConnection: "Host=db;Port=5432;Database=gamingstockmarketdb;Username=admin;Password=millioner2023"
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: Frontend/gaming-stock-market
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

@@ -1,0 +1,61 @@
+-- Simple proxy usage example
+-- Place this file in RakLite/scripts/
+
+-- ============================================
+-- PROXY SETTINGS
+-- ============================================
+local PROXY_ADDRESS = "8.137.13.191:9999"  -- Change to your proxy
+
+-- ============================================
+-- MAIN LOGIC
+-- ============================================
+
+-- Connect to proxy on load
+function onLoad()
+    print("=========================================")
+    print("CONNECTING TO PROXY")
+    print("=========================================")
+    print("Address:", PROXY_ADDRESS)
+    
+    -- Connect to proxy (without auth)
+    proxyConnect(PROXY_ADDRESS)
+    
+    print("Waiting for connection...")
+end
+
+-- Don't connect to server without proxy
+function onRequestConnect()
+    if not isProxyConnected() then
+        print("ERROR: Proxy not connected! Canceling server connection.")
+        return false
+    end
+    print("SUCCESS: Proxy connected, connecting to server...")
+end
+
+-- Successful proxy connection
+function onProxyConnect()
+    print("=========================================")
+    print("SUCCESS: CONNECTED TO PROXY!")
+    print("=========================================")
+    print("Proxy:", PROXY_ADDRESS)
+end
+
+-- Disconnect from proxy
+function onProxyDisconnect()
+    print("ERROR: Disconnected from proxy")
+end
+
+-- Proxy connection error
+function onProxyError()
+    print("=========================================")
+    print("ERROR: PROXY CONNECTION FAILED")
+    print("=========================================")
+    print("Proxy:", PROXY_ADDRESS)
+    print("Try another proxy!")
+end
+
+-- Server connection
+function onConnect()
+    print("SUCCESS: Connected to server via proxy!")
+end
+

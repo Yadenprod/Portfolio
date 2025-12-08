@@ -1,0 +1,99 @@
+{
+  "launcher_path": "C:\\Program Files (x86)\\Radic\\RADMIR LAUNCHER\\RADMIR_LAUNCHER_EX.exe",
+  "sandboxie_start": "C:\\Program Files\\Sandboxie\\Start.exe",
+  "common_password": "123456789q",
+  "time_shift_years": 1,
+  "accounts": [
+    {
+      "sandbox": "okno1",
+      "nickname": "Kronix_Bonter",
+      "server": "SERVER 21",
+      "ban": "no"
+    },
+    {
+      "sandbox": "okno2",
+      "nickname": "Krystal_Kler",
+      "server": "SERVER 20",
+      "ban": "no"
+    },
+    {
+      "sandbox": "okno3",
+      "nickname": "Organ_Pover",
+      "server": "SERVER 20",
+      "ban": "no"
+    },
+    {
+      "sandbox": "okno4",
+      "nickname": "Kyxsan_Erti",
+      "server": "SERVER 20",
+      "ban": "yes"
+    },
+    {
+      "sandbox": "okno5",
+      "nickname": "Nastak_Zigzag",
+      "server": "SERVER 21",
+      "ban": "yes"
+    },
+    {
+      "sandbox": "okno6",
+      "nickname": "Lost_Ender",
+      "server": "SERVER 21",
+      "ban": "no"
+    },
+    {
+      "sandbox": "okno7",
+      "nickname": "Kalka_Afganka",
+      "server": "SERVER 19",
+      "ban": "no"
+    },
+    {
+      "sandbox": "okno8",
+      "nickname": "Rtos_Clous",
+      "server": "SERVER 18",
+      "ban": "no"
+    },
+    {
+      "sandbox": "okno9",
+      "nickname": "Rtos_Clous",
+      "server": "SERVER 19",
+      "ban": "no"
+    },
+    {
+      "sandbox": "okno10",
+      "nickname": "Peligim_Lorgos",
+      "server": "SERVER 18",
+      "ban": "no"
+    },
+    {
+      "sandbox": "okno11",
+      "nickname": "Swap_Djeizeta",
+      "server": "SERVER 19",
+      "ban": "no"
+    },
+    {
+      "sandbox": "okno12",
+      "nickname": "Kloun_Mestn",
+      "server": "SERVER 18",
+      "ban": "no"
+    },
+    {
+      "sandbox": "okno13",
+      "nickname": "Popla_Kai",
+      "server": "SERVER 17",
+      "ban": "no"
+    },
+    {
+      "sandbox": "okno14",
+      "nickname": "Krals_Prelud",
+      "server": "SERVER 17",
+      "ban": "yes"
+    },
+    {
+      "sandbox": "okno15",
+      "nickname": "Jack_Trata",
+      "server": "SERVER 17",
+      "ban": "no"
+    }
+  ]
+}
+

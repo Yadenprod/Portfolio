@@ -1,0 +1,77 @@
+-- Proxy usage example for RakSAMP Lite
+-- Place this file in RakLite/scripts/
+
+-- ============================================
+-- PROXY SETTINGS
+-- ============================================
+local PROXY_ADDRESS = "123.145.167.189:58765"  -- Change to your proxy
+local PROXY_USERNAME = "user"                   -- Change to your username (optional)
+local PROXY_PASSWORD = "pass"                   -- Change to your password (optional)
+
+-- ============================================
+-- MAIN LOGIC
+-- ============================================
+
+-- Connect to proxy on script load
+function onLoad()
+    print("=========================================")
+    print("CONNECTING TO PROXY")
+    print("=========================================")
+    print("Address:", PROXY_ADDRESS)
+    
+    -- Connect to proxy
+    if PROXY_USERNAME and PROXY_PASSWORD then
+        proxyConnect(PROXY_ADDRESS, PROXY_USERNAME, PROXY_PASSWORD)
+    else
+        proxyConnect(PROXY_ADDRESS) -- Without auth
+    end
+    
+    print("Waiting for proxy connection...")
+end
+
+-- Don't connect to server without proxy
+function onRequestConnect()
+    if not isProxyConnected() then
+        print("ERROR: Proxy not connected! Canceling server connection.")
+        return false -- Cancel connection
+    end
+    print("SUCCESS: Proxy connected, connecting to server...")
+end
+
+-- Successful proxy connection
+function onProxyConnect()
+    print("=========================================")
+    print("SUCCESS: CONNECTED TO PROXY!")
+    print("=========================================")
+    print("Proxy:", PROXY_ADDRESS)
+    print("Now you can connect to server")
+end
+
+-- Disconnect from proxy
+function onProxyDisconnect()
+    print("=========================================")
+    print("ERROR: DISCONNECTED FROM PROXY")
+    print("=========================================")
+end
+
+-- Proxy connection error
+function onProxyError()
+    print("=========================================")
+    print("ERROR: PROXY CONNECTION FAILED")
+    print("=========================================")
+    print("Check proxy settings:")
+    print("  Address:", PROXY_ADDRESS)
+    print("  Username:", PROXY_USERNAME or "not specified")
+end
+
+-- Server connection
+function onConnect()
+    print("Connected to server via proxy!")
+end
+
+-- Server disconnect
+function onDisconnect()
+    print("Disconnected from server")
+    -- Can disconnect from proxy
+    -- proxyDisconnect()
+end

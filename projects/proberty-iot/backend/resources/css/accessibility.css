@@ -1,0 +1,115 @@
+/* Улучшение доступности */
+
+/* Фокус для клавиатурной навигации */
+*:focus {
+  outline: 3px solid #7a4ebf;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px #e6f2ff;
+  transition: outline 0.2s, box-shadow 0.2s;
+}
+
+/* Улучшение читаемости */
+body {
+  line-height: 1.6;
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Цветовой контраст */
+.high-contrast {
+  color: #102a43;
+  background-color: #f0f4f8;
+  font-weight: bold;
+}
+
+/* Скрытый текст для скринридеров */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Анимации с учетом предпочтений пользователя */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Увеличение кликабельных областей */
+.touch-target {
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 1rem;
+}
+
+/* Улучшение контраста в темном режиме */
+@media (prefers-color-scheme: dark) {
+  body {
+    color-scheme: dark;
+  }
+
+  a {
+    color: #4db8ff;
+  }
+
+  a:hover {
+    color: #80cdff;
+  }
+  *:focus {
+    outline: 3px solid #80cdff;
+    box-shadow: 0 0 0 4px #1e1133;
+  }
+  .high-contrast {
+    color: #f0f4f8;
+    background-color: #102a43;
+  }
+}
+
+/* Стили для печати */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .no-print {
+    display: none;
+  }
+}
+
+/* Поддержка языков */
+:lang(ru) {
+  font-feature-settings: "liga", "dlig";
+}
+
+/* Улучшение читаемости для людей с дислексией */
+.dyslexia-friendly {
+  font-family: 'OpenDyslexic', sans-serif;
+  letter-spacing: 0.05em;
+  line-height: 1.5;
+}
+
+/* Индикатор клавиатурного фокуса */
+.keyboard-focus-indicator {
+  box-shadow: 0 0 0 3px #0070e0;
+}
+
+/* Адаптивность для разных устройств */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  .mobile-full-width {
+    width: 100%;
+  }
+}

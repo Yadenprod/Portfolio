@@ -1,0 +1,1 @@
+std::string genAuthKey(const std::string &authIn);

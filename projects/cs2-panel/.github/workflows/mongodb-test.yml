@@ -1,0 +1,41 @@
+name: Test MongoDB Connection
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    services:
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+        
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Create .env.local
+        run: |
+          echo "MONGODB_URI=mongodb://localhost:27017/cspanel-test" > .env.local
+          echo "NEXTAUTH_URL=http://localhost:3000" >> .env.local
+          echo "NEXTAUTH_SECRET=test-secret-key" >> .env.local
+          
+      - name: Seed database
+        run: npm run seed
+        
+      - name: Run build
+        run: npm run build 

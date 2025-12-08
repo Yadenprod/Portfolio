@@ -1,0 +1,9 @@
+<?php
+	$data_base_settings = array(
+		'servername' => 'localhost',
+		'username' => 'root',
+		'password' => 'pass',
+		'namedb' => 'opencase',
+		'encoding' => 'utf8'
+	);
+?>

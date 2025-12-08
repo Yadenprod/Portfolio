@@ -1,0 +1,90 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "IIoT Dashboard API",
+        "description": "API для промышленной платформы мониторинга оборудования",
+        "version": "1.0.0",
+        "contact": {
+            "email": "support@iiot-dashboard.com"
+        }
+    },
+    "host": "api.iiot-dashboard.local",
+    "basePath": "/api",
+    "schemes": ["https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/equipment": {
+            "get": {
+                "summary": "Список оборудования",
+                "description": "Возвращает список всего оборудования",
+                "responses": {
+                    "200": {
+                        "description": "Успешный ответ",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Equipment"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Создание оборудования",
+                "description": "Добавление нового оборудования",
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/Equipment"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Оборудование создано"
+                    }
+                }
+            }
+        },
+        "/maintenance-requests": {
+            "get": {
+                "summary": "Список заявок на обслуживание",
+                "responses": {
+                    "200": {
+                        "description": "Список заявок"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Equipment": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string",
+                    "enum": ["operational", "warning", "critical"]
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "bearerAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Authorization header"
+        }
+    }
+}

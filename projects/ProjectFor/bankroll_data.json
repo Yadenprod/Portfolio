@@ -1,0 +1,10 @@
+{
+  "initial_bankroll": 50000.0,
+  "current_bankroll": 50000.0,
+  "strategy": "martingale",
+  "bet_history": [],
+  "consecutive_losses": 0,
+  "fibonacci_sequence": [1, 1],
+  "base_bet": 1000.0,
+  "last_updated": "2025-06-28T15:30:00"
+} 

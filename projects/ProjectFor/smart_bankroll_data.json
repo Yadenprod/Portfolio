@@ -1,0 +1,12 @@
+{
+  "current_bankroll": 50000.0,
+  "initial_bankroll": 50000.0,
+  "strategy": "kelly",
+  "bet_history": [],
+  "total_bets": 0,
+  "winning_bets": 0,
+  "current_streak": 0,
+  "max_drawdown": 0.0,
+  "peak_bankroll": 50000.0,
+  "last_updated": "2025-06-28T16:12:02.241049"
+}

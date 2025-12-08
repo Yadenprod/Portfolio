@@ -1,0 +1,45 @@
+/*!
+ * Vue.js v2.7.14
+ * (c) 2014-2022 Evan You
+ * Released under the MIT License.
+ */
+
+/*!
+ * cast `I.Scrollbar` to `Scrollbar` to avoid error
+ *
+ * `I.Scrollbar` is not assignable to `Scrollbar`:
+ *     "privateProp" is missing in `I.Scrollbar`
+ *
+ * @see https://github.com/Microsoft/TypeScript/issues/2672
+ */
+
+/*!
+ * vue-range-slider v0.6.0
+ * https://github.com/ktsn/vue-range-slider
+ *
+ * @license
+ * Copyright (c) 2016-2018 katashin
+ * Released under the MIT license
+ * https://github.com/ktsn/vue-range-slider/blob/master/LICENSE
+ */
+
+/*!
+ * vue-toastr v2.1.2 
+ * (c) 2019 s4l1h
+ * Released under the MIT License.
+ */
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */

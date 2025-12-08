@@ -1,0 +1,41 @@
+.mymenu-side-menu {
+	list-style-type: none;
+	padding: 0 20px;
+	margin: 0;
+}
+
+.mymenu-side-menu-item {
+	line-height: 42px;
+	border-bottom: 1px solid #ddd;
+}
+
+.mymenu-side-menu-item:last-child {
+	border-bottom: none;
+}
+
+.mymenu-side-menu-item .fa {
+	margin-top: 14px;
+	cursor: pointer;
+	padding: 0 5px;
+}
+
+.mymenu-side-menu-item.open .fa {
+	transform: rotate(-90deg);
+}
+
+.mymenu-side-menu .mymenu-side-menu {
+	padding: 0;
+	display: none;
+}
+
+.mymenu-side-menu .mymenu-side-menu .mymenu-side-menu-item:last-child {
+	border-bottom: 1px solid #ddd;
+}
+
+.mymenu-side-menu .mymenu-side-menu-item.open + .mymenu-side-menu {
+	display: block;
+}
+
+.mymenu-side-menu .mymenu-side-menu .mymenu-side-menu-item a {
+	padding-left: 20px;
+}

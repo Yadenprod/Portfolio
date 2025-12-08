@@ -1,0 +1,122 @@
+[
+  {
+    "id": "hltv_4539777112208384154",
+    "team1": "BIG",
+    "team2": "Bärendienst",
+    "date": "2025-06-28 14:10",
+    "tournament": "DACH Masters Season 3 Finals",
+    "stage": "",
+    "format": "BO3",
+    "url": "https://www.hltv.org/matches/2382847/big-vs-brendienst-dach-masters-season-3-finals",
+    "sport": "csgo",
+    "source": "hltv"
+  },
+  {
+    "id": "hltv_8741111997802664055",
+    "team1": "GameHunters",
+    "team2": "Keyd Stars",
+    "date": "2025-06-28 20:00",
+    "tournament": "Thunderpick World Championship 2025 South America Series 1",
+    "stage": "",
+    "format": "BO3",
+    "url": "https://www.hltv.org/matches/2383369/gamehunters-vs-keyd-stars-thunderpick-world-championship-2025-south-america-series-1",
+    "sport": "csgo",
+    "source": "hltv"
+  },
+  {
+    "id": "hltv_8825261636832381149",
+    "team1": "Akimbo",
+    "team2": "BOSS",
+    "date": "2025-06-29 02:00",
+    "tournament": "Dust2.us Eagle Masters Series 2Semifinal",
+    "stage": "Semifinal",
+    "format": "BO3",
+    "url": "https://www.hltv.org/matches/2383216/akimbo-vs-boss-dust2us-eagle-masters-series-2",
+    "sport": "csgo",
+    "source": "hltv"
+  },
+  {
+    "id": "hltv_5503065489767362429",
+    "team1": "SELVA",
+    "team2": "ex-W7M",
+    "date": "2025-06-29 17:00",
+    "tournament": "Thunderpick World Championship 2025 South America Series 1",
+    "stage": "",
+    "format": "BO3",
+    "url": "https://www.hltv.org/matches/2383366/selva-vs-ex-w7m-thunderpick-world-championship-2025-south-america-series-1",
+    "sport": "csgo",
+    "source": "hltv"
+  },
+  {
+    "id": "hltv_8049150319602603742",
+    "team1": "RED Canids",
+    "team2": "Bounty Hunters",
+    "date": "2025-06-29 20:00",
+    "tournament": "Thunderpick World Championship 2025 South America Series 1",
+    "stage": "",
+    "format": "BO3",
+    "url": "https://www.hltv.org/matches/2383367/red-canids-vs-bounty-hunters-thunderpick-world-championship-2025-south-america-series-1",
+    "sport": "csgo",
+    "source": "hltv"
+  },
+  {
+    "id": "hltv_2638898640607215546",
+    "team1": "Getting Info",
+    "team2": "LAG",
+    "date": "2025-06-30 00:00",
+    "tournament": "Dust2.us Eagle Masters Series 2Semifinal",
+    "stage": "Semifinal",
+    "format": "BO3",
+    "url": "https://www.hltv.org/matches/2383217/getting-info-vs-lag-dust2us-eagle-masters-series-2",
+    "sport": "csgo",
+    "source": "hltv"
+  },
+  {
+    "id": "hltv_3661064429124873106",
+    "team1": "Prestige",
+    "team2": "GenOne",
+    "date": "2025-06-30 10:00",
+    "tournament": "European Pro League Season 26",
+    "stage": "",
+    "format": "BO3",
+    "url": "https://www.hltv.org/matches/2383385/prestige-vs-genone-european-pro-league-season-26",
+    "sport": "csgo",
+    "source": "hltv"
+  },
+  {
+    "id": "hltv_759850122484757928",
+    "team1": "ENERGYULTRA",
+    "team2": "Bad News Eagles",
+    "date": "2025-06-30 12:30",
+    "tournament": "European Pro League Season 26",
+    "stage": "",
+    "format": "BO3",
+    "url": "https://www.hltv.org/matches/2383386/energyultra-vs-bad-news-eagles-european-pro-league-season-26",
+    "sport": "csgo",
+    "source": "hltv"
+  },
+  {
+    "id": "hltv_9204416933608939204",
+    "team1": "1win",
+    "team2": "WOPA",
+    "date": "2025-07-01 10:00",
+    "tournament": "European Pro League Season 26",
+    "stage": "",
+    "format": "BO3",
+    "url": "https://www.hltv.org/matches/2383387/1win-vs-wopa-european-pro-league-season-26",
+    "sport": "csgo",
+    "source": "hltv"
+  },
+  {
+    "id": "hltv_8446425437774778544",
+    "team1": "Volt",
+    "team2": "BRUTE",
+    "date": "2025-07-01 12:30",
+    "tournament": "European Pro League Season 26",
+    "stage": "",
+    "format": "BO3",
+    "url": "https://www.hltv.org/matches/2383388/volt-vs-brute-european-pro-league-season-26",
+    "sport": "csgo",
+    "source": "hltv"
+  }
+]

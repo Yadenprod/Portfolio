@@ -1,0 +1,1 @@
+.invItem{cursor:pointer}.invItem:hover{background:#ecf0f5;position:relative}.invItem input{display:none}.invItem i{display:none;position:absolute;top:10%;left:10%;}.invItem.checked i{display:block}

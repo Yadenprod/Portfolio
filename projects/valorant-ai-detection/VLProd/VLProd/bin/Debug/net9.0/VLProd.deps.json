@@ -1,0 +1,112 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "VLProd/1.0.0": {
+        "dependencies": {
+          "InputSimulator": "1.0.4",
+          "OpenCvSharp4.Windows": "4.11.0.20250507"
+        },
+        "runtime": {
+          "VLProd.dll": {}
+        }
+      },
+      "InputSimulator/1.0.4": {
+        "runtime": {
+          "lib/net20/WindowsInput.dll": {
+            "assemblyVersion": "1.0.4.0",
+            "fileVersion": "1.0.4.0"
+          }
+        }
+      },
+      "OpenCvSharp4/4.11.0.20250507": {
+        "dependencies": {
+          "System.Memory": "4.6.3"
+        },
+        "runtime": {
+          "lib/net6.0/OpenCvSharp.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "OpenCvSharp4.runtime.win/4.11.0.20250507": {
+        "runtimeTargets": {
+          "runtimes/win-x64/native/OpenCvSharpExtern.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/opencv_videoio_ffmpeg4110_64.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "2024.12.0.0"
+          },
+          "runtimes/win-x86/native/OpenCvSharpExtern.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/opencv_videoio_ffmpeg4110.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "2024.12.0.0"
+          }
+        }
+      },
+      "OpenCvSharp4.Windows/4.11.0.20250507": {
+        "dependencies": {
+          "OpenCvSharp4": "4.11.0.20250507",
+          "OpenCvSharp4.runtime.win": "4.11.0.20250507"
+        }
+      },
+      "System.Memory/4.6.3": {}
+    }
+  },
+  "libraries": {
+    "VLProd/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "InputSimulator/1.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-D0LvRCPQMX6/FJHBjng+RO+wRDuHTJrfo7IAc7rmkPvRqchdVGJWg3y70peOtDy3OLNK+HSOwVkH4GiuLnkKgA==",
+      "path": "inputsimulator/1.0.4",
+      "hashPath": "inputsimulator.1.0.4.nupkg.sha512"
+    },
+    "OpenCvSharp4/4.11.0.20250507": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-j/R+G6xGC5IV2wGRU0/GF5qG/FrP+Uxp8dmNnXFlIdiw8Gfo4mtvKcBOBfS/bn4pP/7FNHLFX/xvMtgPJeDjAA==",
+      "path": "opencvsharp4/4.11.0.20250507",
+      "hashPath": "opencvsharp4.4.11.0.20250507.nupkg.sha512"
+    },
+    "OpenCvSharp4.runtime.win/4.11.0.20250507": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3PxMXyzR+pkL9UOx2PiBjZm+/iyCIu5D6OlA1sq9MH7oWrfvVnCXJlUYhIJv67F7SLUwUuGwXDIQBfdsL/54lg==",
+      "path": "opencvsharp4.runtime.win/4.11.0.20250507",
+      "hashPath": "opencvsharp4.runtime.win.4.11.0.20250507.nupkg.sha512"
+    },
+    "OpenCvSharp4.Windows/4.11.0.20250507": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Vwbvv8mkK9L8kbaTpQyiguuVj7+2wbXVM2FJkJjsfEIjXjSvzt5mWX/yfYJA6aPH0Mn89FwlBtHo84Cl143C7g==",
+      "path": "opencvsharp4.windows/4.11.0.20250507",
+      "hashPath": "opencvsharp4.windows.4.11.0.20250507.nupkg.sha512"
+    },
+    "System.Memory/4.6.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qdcDOgnFZY40+Q9876JUHnlHu7bosOHX8XISRoH94fwk6hgaeQGSgfZd8srWRZNt5bV9ZW2TljcegDNxsf+96A==",
+      "path": "system.memory/4.6.3",
+      "hashPath": "system.memory.4.6.3.nupkg.sha512"
+    }
+  }
+}

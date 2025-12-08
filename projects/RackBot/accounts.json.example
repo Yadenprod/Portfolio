@@ -1,0 +1,18 @@
+[
+    {
+        "username": "bot1",
+        "password": "password123",
+        "email": "bot1@example.com"
+    },
+    {
+        "username": "bot2",
+        "password": "password123",
+        "email": "bot2@example.com"
+    },
+    {
+        "username": "bot3",
+        "password": "password123",
+        "email": "bot3@example.com"
+    }
+]
+

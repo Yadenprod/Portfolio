@@ -1,0 +1,36 @@
+{
+  "audio": {
+    "sample_rate": 48000,
+    "channels": 2,
+    "chunk_size": 1024,
+    "device_id": null
+  },
+  "analysis": {
+    "amplitude_threshold": 0.05,
+    "frequency_threshold": 0.1,
+    "fft_size": 1024
+  },
+  "positioning": {
+    "ear_distance": 0.15,
+    "sound_speed": 343,
+    "max_distance": 50
+  },
+  "display": {
+    "window_size": [
+      400,
+      400
+    ],
+    "radar_radius": 150,
+    "update_rate": 60
+  },
+  "filters": {
+    "noise_threshold": 0.01,
+    "voice_filter": true,
+    "music_filter": true,
+    "noise_filter": true
+  },
+  "calibration": {
+    "distance_calibration": {},
+    "angle_calibration": {}
+  }
+}

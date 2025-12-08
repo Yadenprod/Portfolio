@@ -1,0 +1,49 @@
+{
+  "regions": {
+    "rack_menu": {
+      "x": 100,
+      "y": 100,
+      "width": 800,
+      "height": 600,
+      "description": "Область меню стеллажа"
+    },
+    "inventory": {
+      "x": 1200,
+      "y": 200,
+      "width": 600,
+      "height": 700,
+      "description": "Область инвентаря"
+    },
+    "chat": {
+      "x": 50,
+      "y": 900,
+      "width": 600,
+      "height": 150,
+      "description": "Область чата для чтения сообщений"
+    },
+    "status_bar": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 50,
+      "description": "Верхняя панель статуса"
+    }
+  },
+  "hotkeys": {
+    "open_rack": "F5",
+    "close_menu": "ESC",
+    "take_item": "ENTER",
+    "store_item": "SPACE"
+  },
+  "ui_elements": {
+    "rack_button": {
+      "template": "images/templates/rack_button.png",
+      "description": "Кнопка открытия стеллажа"
+    },
+    "item_slot": {
+      "template": "images/templates/item_slot.png",
+      "description": "Слот предмета"
+    }
+  }
+}
+

@@ -1,0 +1,298 @@
+-- Скрипт регистрации для RakSAMP Lite
+-- Поместите этот файл в RakLite/scripts/
+
+require("addon")
+local sampev = require("samp.events")
+
+-- ============================================
+-- НАСТРОЙКИ
+-- ============================================
+-- Функция для чтения ника из конфигурационного файла
+local function getNicknameFromConfig()
+    local configFile = io.open("settings/RakSAMP Lite.ini", "r")
+    if configFile then
+        for line in configFile:lines() do
+            local nick = line:match("^nick%s*=%s*(.+)")
+            if nick then
+                configFile:close()
+                return nick:match("^%s*(.-)%s*$") -- Убираем пробелы
+            end
+        end
+        configFile:close()
+    end
+    return "test_user" -- Значение по умолчанию
+end
+
+local username = getNicknameFromConfig()  -- Читаем ник из конфига
+local password = "test_pass123"   -- Измените на нужное
+local email = "test@example.com"  -- Измените на нужное (можно также читать из конфига если нужно)
+
+-- Глобальный флаг состояния регистрации
+_REGISTRATION_COMPLETE = false
+_REGISTRATION_IN_PROGRESS = false
+_GAME_INITIALIZED = false  -- Флаг инициализации игры
+_REGISTRATION_DIALOG_COUNT = 0  -- Счетчик диалогов регистрации
+
+-- ============================================
+-- ОСНОВНАЯ ЛОГИКА
+-- ============================================
+
+-- Событие инициализации игры (реальное подключение)
+function sampev.onInitGame()
+    print("=========================================")
+    print("GAME INITIALIZED - REAL CONNECTION")
+    print("=========================================")
+    _GAME_INITIALIZED = true
+    _REGISTRATION_DIALOG_COUNT = 0
+    
+    -- Ждем немного после инициализации игры
+    newTask(function()
+        wait(2000)
+        
+        print("=========================================")
+        print("ACCOUNT REGISTRATION")
+        print("=========================================")
+        print("Username:", username)
+        print("Email:", email)
+        print("=========================================")
+        
+        _REGISTRATION_IN_PROGRESS = true
+        _REGISTRATION_COMPLETE = false
+        
+        -- Send registration command
+        -- Format may vary, try different options:
+        sendInput("/register")
+        -- Or: sendInput("/reg")
+        -- Не отправляем пароль в команде, он будет введен в диалоге
+        
+        print("Registration command sent")
+    end)
+end
+
+-- Старое событие onConnect (может вызываться раньше)
+function onConnect()
+    print("Connection event received, waiting for game initialization...")
+    -- Не делаем ничего здесь, ждем onInitGame
+end
+
+function sampev.onShowDialog(dialogId, style, title, button1, button2, text)
+    print("=========================================")
+    print("DIALOG SHOWN")
+    print("=========================================")
+    print("ID:", dialogId)
+    print("Style:", style)
+    print("Title:", title or "(no title)")
+    print("Button 1:", button1 or "(no button1)")
+    print("Button 2:", button2 or "(no button2)")
+    print("Text:", text or "(no text)")
+    print("=========================================")
+    
+    -- Check if this is registration dialog
+    local lower_title = string.lower(title or "")
+    local lower_text = string.lower(text or "")
+    
+    if string.find(lower_title, "регистр") or 
+       string.find(lower_title, "данные аккаунта") or
+       string.find(lower_text, "регистр") or
+       string.find(lower_text, "пароль") or
+       string.find(lower_text, "password") or
+       string.find(lower_text, "email") or
+       string.find(lower_text, "почт") or
+       string.find(lower_text, "электронной") or
+       string.find(lower_text, "повторите") or
+       string.find(lower_text, "придумайте") then
+        print(">>> This is registration dialog!")
+        _REGISTRATION_DIALOG_COUNT = _REGISTRATION_DIALOG_COUNT + 1
+        print(">>> Dialog count:", _REGISTRATION_DIALOG_COUNT)
+        print(">>> Filling fields...")
+        
+        -- Обрабатываем диалоги регистрации последовательно
+        newTask(function()
+            wait(500) -- Небольшая задержка для стабильности
+            
+            if style == 1 then -- INPUT
+                -- Определяем поле по тексту диалога
+                local isEmail = string.find(lower_text, "email") or 
+                               string.find(lower_text, "почт") or 
+                               string.find(lower_text, "электронной")
+                local isPassword = string.find(lower_text, "придумайте") or 
+                                  string.find(lower_text, "пароль") and not string.find(lower_text, "повторите")
+                local isPasswordConfirm = string.find(lower_text, "повторите") or 
+                                         string.find(lower_text, "подтверд") or
+                                         string.find(lower_text, "repeat")
+                local isCheckbox = string.find(lower_text, "условия") or 
+                                  string.find(lower_text, "соглашение") or
+                                  string.find(lower_text, "принимаю")
+                
+                -- Первый диалог - Email (согласно скриншоту)
+                if _REGISTRATION_DIALOG_COUNT == 1 or isEmail then
+                    sendDialogResponse(dialogId, 1, 0, email)
+                    print(">>> Email sent (first field)")
+                -- Второй диалог - Пароль
+                elseif _REGISTRATION_DIALOG_COUNT == 2 or isPassword then
+                    sendDialogResponse(dialogId, 1, 0, password)
+                    print(">>> Password sent (second field)")
+                -- Третий диалог - Подтверждение пароля
+                elseif _REGISTRATION_DIALOG_COUNT == 3 or isPasswordConfirm then
+                    sendDialogResponse(dialogId, 1, 0, password)
+                    print(">>> Password confirmation sent (third field)")
+                -- Четвертый диалог - Чекбокс и кнопка ДАЛЕЕ
+                elseif _REGISTRATION_DIALOG_COUNT == 4 or isCheckbox then
+                    -- Для чекбокса нужно нажать кнопку (button = 1 означает выбор/подтверждение)
+                    -- Если это диалог с чекбоксом, просто нажимаем кнопку ДАЛЕЕ
+                    sendDialogResponse(dialogId, 1, 0, "") -- Пустой ввод, только кнопка
+                    print(">>> Checkbox accepted, NEXT button pressed")
+                else
+                    -- По умолчанию определяем по тексту
+                    if isEmail then
+                        sendDialogResponse(dialogId, 1, 0, email)
+                        print(">>> Email sent (auto-detected)")
+                    elseif isPasswordConfirm then
+                        sendDialogResponse(dialogId, 1, 0, password)
+                        print(">>> Password confirmation sent (auto-detected)")
+                    elseif isPassword then
+                        sendDialogResponse(dialogId, 1, 0, password)
+                        print(">>> Password sent (auto-detected)")
+                    elseif isCheckbox then
+                        sendDialogResponse(dialogId, 1, 0, "")
+                        print(">>> Checkbox accepted (auto-detected)")
+                    else
+                        -- Если не определили, пробуем по порядку
+                        if _REGISTRATION_DIALOG_COUNT == 1 then
+                            sendDialogResponse(dialogId, 1, 0, email)
+                            print(">>> Email sent (fallback)")
+                        elseif _REGISTRATION_DIALOG_COUNT == 2 then
+                            sendDialogResponse(dialogId, 1, 0, password)
+                            print(">>> Password sent (fallback)")
+                        elseif _REGISTRATION_DIALOG_COUNT == 3 then
+                            sendDialogResponse(dialogId, 1, 0, password)
+                            print(">>> Password confirmation sent (fallback)")
+                        else
+                            sendDialogResponse(dialogId, 1, 0, "")
+                            print(">>> Next button pressed (fallback)")
+                        end
+                    end
+                end
+            elseif style == 3 then -- PASSWORD
+                -- Пароль
+                sendDialogResponse(dialogId, 1, 0, password)
+                print(">>> Password sent (PASSWORD style)")
+            else
+                -- Для других стилей (может быть диалог с чекбоксом)
+                if string.find(lower_text, "условия") or string.find(lower_text, "соглашение") or string.find(lower_text, "принимаю") then
+                    -- Чекбокс - просто нажимаем кнопку
+                    sendDialogResponse(dialogId, 1, 0, "")
+                    print(">>> Checkbox accepted, button pressed (other style)")
+                else
+                    -- По умолчанию пробуем пароль
+                    sendDialogResponse(dialogId, 1, 0, password)
+                    print(">>> Password sent (other style, fallback)")
+                end
+            end
+        end)
+    end
+end
+
+function sampev.onServerMessage(color, text)
+    print("Server message:", text)
+    
+    local lower_text = string.lower(text or "")
+    
+    -- Check success
+    if string.find(lower_text, "успешно") or 
+       string.find(lower_text, "зарегистрирован") or
+       string.find(lower_text, "success") then
+        print("=========================================")
+        print("SUCCESS: REGISTRATION COMPLETE!")
+        print("=========================================")
+        
+        -- Устанавливаем флаги
+        _REGISTRATION_COMPLETE = true
+        _REGISTRATION_IN_PROGRESS = false
+        
+        -- Save result
+        local result = {
+            username = username,
+            status = "success",
+            timestamp = os.time()
+        }
+        
+        -- Create directory if needed
+        os.execute('mkdir results 2>nul')
+        
+        local file = io.open("results/register_" .. username .. ".json", "w")
+        if file then
+            -- Simple save without json library
+            file:write(string.format('{"username":"%s","status":"%s","timestamp":%d}', 
+                username, result.status, result.timestamp))
+            file:close()
+            print("Result saved to results/register_" .. username .. ".json")
+        end
+    end
+    
+    -- Check error
+    if string.find(lower_text, "ошибка") or 
+       string.find(lower_text, "error") or
+       string.find(lower_text, "уже") or
+       string.find(lower_text, "существует") then
+        print("=========================================")
+        print("ERROR: REGISTRATION FAILED")
+        print("=========================================")
+        print("Text:", text)
+        
+        local result = {
+            username = username,
+            status = "error",
+            message = text,
+            timestamp = os.time()
+        }
+        
+        os.execute('mkdir results 2>nul')
+        local file = io.open("results/register_" .. username .. ".json", "w")
+        if file then
+            -- Простое сохранение без json библиотеки
+            local escaped_msg = string.gsub(text or "", '"', '\\"')
+            file:write(string.format('{"username":"%s","status":"%s","message":"%s","timestamp":%d}', 
+                username, result.status, escaped_msg, result.timestamp))
+            file:close()
+        end
+    end
+end
+
+-- Обработчик ответа на запрос класса (когда сервер отвечает на выбор класса)
+function sampev.onRequestClassResponse(canSpawn, team, skin, _unused, position, rotation, weapons, ammo)
+    print("=========================================")
+    print("CLASS SELECTED AFTER REGISTRATION")
+    print("=========================================")
+    print("Can spawn:", canSpawn)
+    
+    -- Если регистрация еще не завершена, помечаем как завершенную при выборе класса
+    if not _REGISTRATION_COMPLETE then
+        _REGISTRATION_COMPLETE = true
+        _REGISTRATION_IN_PROGRESS = false
+        print("Registration marked as complete (class selected)")
+    end
+    
+    -- Автоматически запрашиваем спавн после выбора класса
+    if canSpawn then
+        newTask(function()
+            wait(1000) -- Небольшая задержка
+            print("Requesting spawn after registration...")
+            sendSpawnRequest()
+        end)
+    end
+end
+
+function sampev.onPlayerSpawn()
+    print("=========================================")
+    print("PLAYER SPAWNED AFTER REGISTRATION")
+    print("=========================================")
+    
+    -- Если регистрация еще не завершена, помечаем как завершенную при спавне
+    if not _REGISTRATION_COMPLETE then
+        _REGISTRATION_COMPLETE = true
+        _REGISTRATION_IN_PROGRESS = false
+        print("Registration marked as complete (player spawned)")
+    end
+end
+

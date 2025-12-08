@@ -1,0 +1,150 @@
+@media (max-width: 1700px) {
+    header .header_block .steam_log-in {
+        font-size: 20px;
+    }
+    header .header_block .header_contacts .link_vk {
+        display: none;
+    }
+    main .user_data {
+        align-items: center;
+    }
+    main .user_data .user_data__left {
+        margin: 0;
+    }
+    .gun_item {
+        background-size: cover;
+    }
+    .my_object .my_object__block-border .my_object__block .gun_item {
+        width: 48%;
+    }
+    .case_contents {
+        justify-content: center;
+    }
+    .case_contents .gun_item {
+        margin: 15px  auto;
+    }
+}
+@media (max-width: 1400px) {
+    header {
+        zoom: 0.8;
+    }
+    .user_data .user_data__center .user_information {
+        background: none;
+    }
+    .user_data .user_data__center .user_information a.user_balance {
+        padding: 10px 30px;
+    }
+    .user_data .user_data__center .user_information a.user_balance .balance_number {
+        font-size: 30px;
+    }
+    .user_data .user_data__center .user_information a.user_balance .balance_number:after {
+        width: 14px;
+        height: 22px;
+        background-size: contain;
+    }
+    .trades_list {
+        width: 100%;
+        padding: 10px;
+    }
+    .object_upgrade .object_upgrade__block .item_left,
+    .object_upgrade .object_upgrade__block .item_right {
+        margin: 90px 40px;
+    }
+    .my_object {
+        width: 47%;
+    }
+    .upgrade_block {
+        width: 50%;
+    }
+    .upgrade_block .items_block {
+        justify-content: center;
+    }
+    .upgrade_block .items_block .gun_item {
+        margin: 15px;
+    }
+    .roulette_block {
+        zoom: 0.65;
+    }
+}
+@media (max-width: 1200px) {
+    main .main_banner {
+        zoom: 0.8;
+    }
+    main .popular_cases .cases_block .border_item .cases_item .price,
+    main .limited_edition .cases_block .border_item .cases_item .price {
+        font-size: 24px;
+    }
+    main .popular_cases .cases_block .border_item .cases_item .price span,
+    main .limited_edition .cases_block .border_item .cases_item .price span {
+        font-size: 18px;
+    }
+    main .live_reviews,
+    main .limited_edition {
+        margin-top: 0;
+    }
+    main .user_data {
+        zoom: 0.8;
+    }
+    .upgrade_block .filters .search form {
+        width: 70%;
+        justify-content: center;
+    }
+    .upgrade_block .filters .search form .search,
+    .upgrade_block .filters .search form .price,
+    .upgrade_block .filters .search form .from_to {
+        margin: 8px auto;
+    }
+    .upgrade_block .items_block {
+        max-height: 595px;
+    }
+    .upgrade_instruction {
+        width: 75%;
+        justify-content: center;
+        margin: 0 auto 80px auto;
+    }
+    .upgrade_instruction .instruction_item {
+        margin: auto;
+    }
+    .sidebar .battle_information .total_battles .quantity,
+    .sidebar .battle_information .active_battles .quantity {
+        font-size: 22px;
+    }
+}
+@media (max-width: 1040px) {
+    main .main_banner .conter_left {
+        display: none;
+    }
+    main .main_banner .conter_right {
+        display: none;
+    }
+    main .main_banner .text_block h1 {
+        font-size: 44px;
+        padding: 0 92px;
+    }
+    main .main_banner .main_icons_block {
+        justify-content: center;
+    }
+    main .main_banner .main_icons_block a.icons_item {
+        margin: 10px auto;
+    }
+    main .popular_cases .cases_block,
+    main .limited_edition .cases_block {
+        justify-content: center;
+    }
+    main .popular_cases .cases_block .border_item,
+    main .limited_edition .cases_block .border_item {
+        margin: 25px auto;
+    }
+    .object_upgrade .object_upgrade__block .item_center .item_center-top .probability .probability_scale progress[value] {
+        width: 60%;
+    }
+    .object_upgrade .object_upgrade__block .item_center .item_center-top .text {
+        font-size: 22px;
+    }
+    .object_upgrade .object_upgrade__block .item_center .item_center-bottom {
+        margin-top: 50px;
+    }
+    .roulette_block {
+        zoom: 0.6;
+    }
+}

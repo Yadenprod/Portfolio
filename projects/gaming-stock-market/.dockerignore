@@ -1,0 +1,16 @@
+# Ignore test project
+Backend/GamingStockMarket.Tests/
+
+# Ignore frontend build artifacts (already handled in frontend Dockerfile)
+Frontend/gaming-stock-market/node_modules/
+Frontend/gaming-stock-market/dist/
+
+# Ignore common development files
+.git/
+.vscode/
+node_modules/
+*.swp
+*.bak
+*~
+.env
+.DS_Store

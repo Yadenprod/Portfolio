@@ -1,0 +1,21 @@
+{
+  "name": "opencase_bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-rsa": "^1.0.8",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
+    "steam-totp": "^2.1.1",
+    "steam-tradeoffer-manager": "^2.10.1",
+    "steam-user": "^4.14.0",
+    "steamcommunity": "^3.41.3",
+    "xml2js": "^0.4.23"
+  }
+}

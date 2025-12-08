@@ -1,0 +1,74 @@
+{
+  "bot": {
+    "name": "RackBot",
+    "version": "1.0.0",
+    "enabled": true,
+    "max_accounts": 10,
+    "check_interval_seconds": 60
+  },
+  "server": {
+    "ip": "127.0.0.1",
+    "port": 7777,
+    "name": "Radmir RP"
+  },
+  "accounts": {
+    "accounts_file": "data/accounts.json",
+    "auto_create": false,
+    "create_on_start": 0
+  },
+  "proxies": {
+    "proxies_file": "data/proxies.json",
+    "rotate_on_each_account": true,
+    "test_before_use": true
+  },
+  "network": {
+    "change_mac": true,
+    "network_interface": "Ethernet",
+    "mac_per_account": true
+  },
+  "moonloader": {
+    "enabled": true,
+    "moonloader_dir": "moonloader",
+    "use_scripts": true,
+    "auto_generate_scripts": true
+  },
+  "web_api": {
+    "enabled": false,
+    "base_url": "https://radmir-rp.com",
+    "try_discovery": true
+  },
+  "farming": {
+    "enabled": true,
+    "actions": [
+      "move_forward",
+      "move_backward",
+      "turn_left",
+      "turn_right",
+      "jump",
+      "crouch"
+    ],
+    "action_interval_min": 0.5,
+    "action_interval_max": 2.0,
+    "session_duration_minutes": 60
+  },
+  "delays": {
+    "min_action_delay": 1.0,
+    "max_action_delay": 3.0,
+    "registration_delay": 5.0,
+    "login_delay": 3.0,
+    "error_retry_delay": 10.0
+  },
+  "safety": {
+    "human_like_behavior": true,
+    "randomize_delays": true,
+    "max_actions_per_minute": 20,
+    "break_after_minutes": 120,
+    "break_duration_minutes": 30
+  },
+  "logging": {
+    "level": "INFO",
+    "file_enabled": true,
+    "console_enabled": true,
+    "log_directory": "logs"
+  }
+}

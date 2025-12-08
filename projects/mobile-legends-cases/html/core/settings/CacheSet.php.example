@@ -1,0 +1,8 @@
+<?php
+	$cache_settings = array(
+		'enable' => false,
+		'servers' => array(
+			array('servername' => 'localhost', 'port' => 80)
+		)
+	);
+?>

@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true, // Set to true to skip type checking of declaration files
+    "baseUrl": ".", // Set baseUrl to the root of the frontend project (Frontend/gaming-stock-market)
+    "paths": {
+      "@/*": ["./src/*"],
+      "store": ["./src/store.ts"],
+      "components/*": ["./src/components/*"],
+      "pages/*": ["./src/pages/*"],
+      "api/*": ["./src/api/*"],
+      "slices/*": ["./src/slices/*"],
+      "types/*": ["./src/types/*"]
+    },
+    "typeRoots": ["./node_modules/@types"], // Explicitly include type roots
+    "types": ["react", "react-dom"], // Explicitly include React types
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx", // Changed to react-jsx for production build
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src"]
+}

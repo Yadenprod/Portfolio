@@ -1,0 +1,151 @@
+/* Базовые переходы */
+.transition-default {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Анимации появления */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from { 
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Анимации наведения */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.hover-grow {
+  transition: transform 0.3s ease;
+}
+
+.hover-grow:hover {
+  transform: scale(1.05);
+}
+
+/* Анимации состояний */
+.animate-pulse-soft {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-bounce-soft {
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10%); }
+}
+
+/* Анимации загрузки */
+@keyframes spinner {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  animation: spinner 1s linear infinite;
+}
+
+/* Анимации уведомлений */
+@keyframes slideInNotification {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutNotification {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* Декоративные классы */
+.animate-fade-in { animation: fadeIn 0.5s ease-out; }
+.animate-slide-up { animation: slideInUp 0.5s ease-out; }
+.animate-slide-right { animation: slideInRight 0.5s ease-out; }
+.animate-scale-in { animation: scaleIn 0.4s ease-out; }
+
+/* Темный режим адаптация */
+@media (prefers-color-scheme: dark) {
+  .hover-lift:hover {
+    box-shadow: 0 10px 20px rgba(255,255,255,0.05);
+  }
+}
+
+@keyframes wowFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes wowSlideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes wowBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10%); }
+}
+.wow-fade-in {
+  animation: wowFadeIn 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.wow-slide-up {
+  animation: wowSlideUp 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.wow-bounce {
+  animation: wowBounce 1.2s infinite;
+}
