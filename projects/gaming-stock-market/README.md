@@ -63,10 +63,10 @@ Gaming Stock Market - это полнофункциональная биржа �
    - Защита от резких скачков цен (лимит 100% в день)
 
 4. **Background Services:**
-   - **PriceUpdateService** - Обновление цен каждые 5 минут
+   - **PriceUpdateService** - Обновление цен real time
    - **DataParsingService** - Парсинг данных из внешних источников
    - **MarketMakerService** - Создание ликвидности
-   - **NotificationService** - Уведомления в реальном времени
+   - **NotificationService** - Уведомления в real time
    - **AuditService** - Аудит всех операций
 
 5. **Repositories (Repository Pattern):**
@@ -194,7 +194,7 @@ Gaming Stock Market - это полнофункциональная биржа �
 - **Database:** 15+ таблиц с оптимизированными индексами
 - **Real-time:** SignalR с поддержкой множественных подключений
 - **Rate Limiting:** 10 запросов/10 секунд на endpoint
-- **Price Updates:** Каждые 5 минут через Background Service
+- **Price Updates:** real time
 
 ---
 
